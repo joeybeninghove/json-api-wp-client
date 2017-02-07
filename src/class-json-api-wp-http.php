@@ -50,7 +50,7 @@ class Json_Api_Wp_Http {
 
         $options["headers"] = [
             "Accept" => "application/vnd.api+json",
-            "Authorization" => $this->credentials( $resource )
+            "Authorization" => "Basic " . $this->credentials( $resource )
         ];
 
         if ( in_array( $method, ["POST", "PUT"] ) ) {
