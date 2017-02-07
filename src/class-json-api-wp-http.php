@@ -30,8 +30,10 @@ class Json_Api_Wp_Http {
     }
 
     public function credentials( $resource ) {
+        $class = get_class( $resource );
+
         return base64_encode(
-            "{$resource->username}:{$resource->password}"
+            $class::username . ":" . $class::password
         );
     }
 
