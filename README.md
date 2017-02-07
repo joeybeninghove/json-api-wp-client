@@ -74,7 +74,7 @@ This library does not yet support updating of resources because of the lack of
 
 ### Get a single resource
 ```php
-$invoice = Invoice::get_one("invoice_123");
+$invoice = Invoice::get_one( "invoice_123" );
 ```
 
 ### Get all resources
