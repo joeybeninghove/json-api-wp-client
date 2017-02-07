@@ -22,10 +22,21 @@ class Json_Api_Wp_Http {
     }
 
     public function request( $method, $url, $options=[] ) {
+        $successful_method_return_codes = [
+            "POST" => 201, "GET" => 200
+        ];
+
         if ( $method == "GET" ) {
-            return wp_remote_get( $url, $options );
+            $response = wp_remote_get( $url, $options );
         } else {
-            return wp_remote_post( $url, $options );
+            $response = wp_remote_post( $url, $options );
+        }
+
+        if ( $response["response"]["code"] ==
+            $successful_method_return_codes[ $method ] ) {
+            return $response;
+        } else {
+            throw new Json_Api_Wp_Exception( $response );
         }
     }
 
@@ -38,9 +49,9 @@ class Json_Api_Wp_Http {
     }
 
     public function options( $method, $resource ) {
-        if ( in_array( $method, ["PATCH", "DELETE"] ) ) {
+        if ( in_array( $method, ["PUT", "PATCH", "DELETE"] ) ) {
             throw new Json_Api_Wp_Exception(
-                "PATCH and DELETE are not supported"
+                "PUT, PATCH and DELETE are not supported"
             );
         }
 
@@ -53,7 +64,7 @@ class Json_Api_Wp_Http {
             "Authorization" => "Basic " . $this->credentials( $resource )
         ];
 
-        if ( in_array( $method, ["POST", "PUT"] ) ) {
+        if ( $method == "POST" ) {
             $options["headers"]["Content-Type"] = "application/vnd.api+json";
             $options["body"] = $resource->to_json();
         }
