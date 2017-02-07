@@ -29,7 +29,7 @@ class Json_Api_Wp_Resource {
         $resource->attributes = $attributes;
         $http = new Json_Api_Wp_Http();
         $response = $http->post( $resource );
-        $json = json_decode( $response->get_body(), true );
+        $json = json_decode( $response["body"], true );
 
         return static::load_one( $json );
     } 
@@ -38,7 +38,7 @@ class Json_Api_Wp_Resource {
         $resource = new static();
         $http = new Json_Api_Wp_Http();
         $response = $http->get( $resource );
-        $json = json_decode( $response->get_body(), true );
+        $json = json_decode( $response["body"], true );
 
         return static::load_all( $json );
     }
@@ -48,7 +48,7 @@ class Json_Api_Wp_Resource {
         $resource->id = $id;
         $http = new Json_Api_Wp_Http();
         $response = $http->get( $resource );
-        $json = json_decode( $response->get_body(), true );
+        $json = json_decode( $response["body"], true );
 
         return static::load_one( $json );
     }
