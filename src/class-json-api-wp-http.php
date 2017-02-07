@@ -33,7 +33,7 @@ class Json_Api_Wp_Http {
         $class = get_class( $resource );
 
         return base64_encode(
-            $class::username . ":" . $class::password
+            $class::$username . ":" . $class::$password
         );
     }
 
