@@ -10,4 +10,8 @@ class Json_Api_Wp_Exception extends Exception {
     public function get_status_code() {
         return $this->response["code"];
     }
+
+    public function get_message() {
+        return $this->response["message"];
+    }
 }
