@@ -12,6 +12,7 @@ class TestResource extends Json_Api_Wp_Resource {
     }
 }
 
+Json_Api_Wp_Http::$timeout = 15;
 TestResource::auth( "sk_store_4ac40d63c965132addbf0c19" );
 
 try {

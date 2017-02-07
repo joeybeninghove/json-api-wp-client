@@ -1,6 +1,8 @@
 <?php
 
 class Json_Api_Wp_Http {
+    public static $timeout = 15;
+
     public function get( $resource ) {
         $options = $this->options( "GET", $resource );
         if ( $resource->has_id() ) {
@@ -25,6 +27,8 @@ class Json_Api_Wp_Http {
         $successful_method_return_codes = [
             "POST" => 201, "GET" => 200
         ];
+
+        $options["timeout"] = static::$timeout;
 
         if ( $method == "GET" ) {
             $response = wp_remote_get( $url, $options );
