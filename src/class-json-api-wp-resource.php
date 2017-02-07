@@ -27,7 +27,7 @@ class Json_Api_Wp_Resource {
     public static function create( $attributes=[] ) {
         $resource = new static();
         $resource->attributes = $attributes;
-        $http = new Http();
+        $http = new Json_Api_Wp_Http();
         $response = $http->post( $resource );
         $json = json_decode( $response->get_body(), true );
 
@@ -36,7 +36,7 @@ class Json_Api_Wp_Resource {
 
     public static function get_all() {
         $resource = new static();
-        $http = new Http();
+        $http = new Json_Api_Wp_Http();
         $response = $http->get( $resource );
         $json = json_decode( $response->get_body(), true );
 
@@ -46,7 +46,7 @@ class Json_Api_Wp_Resource {
     public static function get_one( $id ) {
         $resource = new static();
         $resource->id = $id;
-        $http = new Http();
+        $http = new Json_Api_Wp_Http();
         $response = $http->get( $resource );
         $json = json_decode( $response->get_body(), true );
 
